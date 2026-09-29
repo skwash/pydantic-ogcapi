@@ -179,9 +179,7 @@ class TestFeatures:
         assert "timeStamp" in dumped
 
     def test_collection_parses_camel_case_input(self):
-        fc = FeatureCollection.model_validate(
-            {"type": "FeatureCollection", "features": [], "numberMatched": 3}
-        )
+        fc = FeatureCollection.model_validate({"type": "FeatureCollection", "features": [], "numberMatched": 3})
         assert fc.number_matched == 3
 
     def test_negative_counts_rejected(self):
@@ -191,9 +189,7 @@ class TestFeatures:
     def test_json_round_trip(self):
         fc = FeatureCollection(
             type="FeatureCollection",
-            features=[
-                Feature(type="Feature", geometry={"type": "Point", "coordinates": [1.0, 2.0]})
-            ],
+            features=[Feature(type="Feature", geometry={"type": "Point", "coordinates": [1.0, 2.0]})],
             number_returned=1,
         )
         assert FeatureCollection.model_validate_json(fc.model_dump_json()).number_returned == 1

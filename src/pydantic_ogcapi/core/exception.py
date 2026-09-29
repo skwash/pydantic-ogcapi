@@ -22,9 +22,7 @@ class Exception_(OGCModel):
     """
 
     code: str = Field(..., description="A machine-readable error code.")
-    description: Optional[str] = Field(
-        default=None, description="A human-readable explanation of the error."
-    )
+    description: Optional[str] = Field(default=None, description="A human-readable explanation of the error.")
 
 
 OGCException = Exception_

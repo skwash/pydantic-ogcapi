@@ -59,15 +59,9 @@ class TransactionResponse(OGCModel):
     """
 
     status: TransactionStatus = Field(..., description="The HTTP status code returned.")
-    location: Optional[str] = Field(
-        default=None, description="URI of the created feature, from the Location header."
-    )
-    etag: Optional[str] = Field(
-        default=None, description="Entity tag of the resource, from the ETag header."
-    )
-    last_modified: Optional[datetime] = Field(
-        default=None, description="When the resource was last modified."
-    )
+    location: Optional[str] = Field(default=None, description="URI of the created feature, from the Location header.")
+    etag: Optional[str] = Field(default=None, description="Entity tag of the resource, from the ETag header.")
+    last_modified: Optional[datetime] = Field(default=None, description="When the resource was last modified.")
 
     @property
     def is_success(self) -> bool:
@@ -106,7 +100,5 @@ class ConditionalHeaders(OGCModel):
         if self.if_match is not None:
             headers["If-Match"] = self.if_match
         if self.if_unmodified_since is not None:
-            headers["If-Unmodified-Since"] = self.if_unmodified_since.strftime(
-                "%a, %d %b %Y %H:%M:%S GMT"
-            )
+            headers["If-Unmodified-Since"] = self.if_unmodified_since.strftime("%a, %d %b %Y %H:%M:%S GMT")
         return headers

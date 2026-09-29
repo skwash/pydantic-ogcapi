@@ -36,9 +36,7 @@ class ConformanceDeclaration(OGCModel):
         conforms_to: The conformance class URIs, serialised as ``conformsTo``.
     """
 
-    conforms_to: list[str] = Field(
-        ..., description="The conformance class URIs the service implements."
-    )
+    conforms_to: list[str] = Field(..., description="The conformance class URIs the service implements.")
 
 
 class SpatialExtent(OGCModel):
@@ -51,9 +49,7 @@ class SpatialExtent(OGCModel):
         crs: The coordinate reference system the bounding boxes are given in.
     """
 
-    bbox: list[list[float]] = Field(
-        ..., min_length=1, description="One or more bounding boxes; the first is overall."
-    )
+    bbox: list[list[float]] = Field(..., min_length=1, description="One or more bounding boxes; the first is overall.")
     crs: Literal[CRS84, CRS84h] = Field(default=CRS84, description="The CRS of the bounding boxes.")
 
     @field_validator("bbox")
@@ -79,15 +75,11 @@ class TemporalExtent(OGCModel):
     interval: list[list[Optional[datetime]]] = Field(
         ..., min_length=1, description="One or more intervals; the first is overall."
     )
-    trs: Literal[GREGORIAN_TRS] = Field(
-        default=GREGORIAN_TRS, description="The temporal reference system."
-    )
+    trs: Literal[GREGORIAN_TRS] = Field(default=GREGORIAN_TRS, description="The temporal reference system.")
 
     @field_validator("interval")
     @classmethod
-    def _check_intervals(
-        cls, intervals: list[list[Optional[datetime]]]
-    ) -> list[list[Optional[datetime]]]:
+    def _check_intervals(cls, intervals: list[list[Optional[datetime]]]) -> list[list[Optional[datetime]]]:
         """Require each interval to be exactly two elements, start before end."""
         for entry in intervals:
             if len(entry) != 2:
@@ -106,12 +98,8 @@ class Extent(OGCModel):
         temporal: The temporal extent, if known.
     """
 
-    spatial: Optional[SpatialExtent] = Field(
-        default=None, description="The spatial extent of the collection."
-    )
-    temporal: Optional[TemporalExtent] = Field(
-        default=None, description="The temporal extent of the collection."
-    )
+    spatial: Optional[SpatialExtent] = Field(default=None, description="The spatial extent of the collection.")
+    temporal: Optional[TemporalExtent] = Field(default=None, description="The temporal extent of the collection.")
 
 
 class Collection(OGCModel):
@@ -138,19 +126,13 @@ class Collection(OGCModel):
     links: list[Link] = Field(..., description="Links to the collection's resources.")
     title: Optional[str] = Field(default=None, description="A title for the collection.")
     description: Optional[str] = Field(default=None, description="A description of the collection.")
-    extent: Optional[Extent] = Field(
-        default=None, description="The extent of the collection's features."
-    )
-    item_type: str = Field(
-        default="feature", description="The type of the items in the collection."
-    )
+    extent: Optional[Extent] = Field(default=None, description="The extent of the collection's features.")
+    item_type: str = Field(default="feature", description="The type of the items in the collection.")
     crs: list[str] = Field(
         default_factory=lambda: [CRS84],
         description="The CRSs in which features may be requested.",
     )
-    storage_crs: Optional[str] = Field(
-        default=None, description="The CRS the features are stored in (Part 2)."
-    )
+    storage_crs: Optional[str] = Field(default=None, description="The CRS the features are stored in (Part 2).")
     storage_crs_coordinate_epoch: Optional[float] = Field(
         default=None,
         description="Coordinate epoch of the storage CRS, as a decimal year (Part 2).",
@@ -168,9 +150,7 @@ class Collections(OGCModel):
     """
 
     links: list[Link] = Field(..., description="Links to related resources.")
-    collections: list[Collection] = Field(
-        ..., description="The collections offered by the service."
-    )
+    collections: list[Collection] = Field(..., description="The collections offered by the service.")
     crs: Optional[list[str]] = Field(
         default=None,
         description="Global CRS list referenceable as '#/crs' by a collection (Part 2).",

@@ -22,9 +22,7 @@ CONF_CRS = "http://www.opengis.net/spec/ogcapi-features-2/1.0/conf/crs"
 
 # Part 3: Filtering.
 CONF_QUERYABLES = "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/queryables"
-CONF_QUERYABLES_QUERY_PARAMETERS = (
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/queryables-query-parameters"
-)
+CONF_QUERYABLES_QUERY_PARAMETERS = "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/queryables-query-parameters"
 CONF_FILTER = "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter"
 CONF_FEATURES_FILTER = "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter"
 
@@ -34,8 +32,6 @@ CONF_CQL2_JSON = "http://www.opengis.net/spec/cql2/1.0/conf/cql2-json"
 CONF_BASIC_CQL2 = "http://www.opengis.net/spec/cql2/1.0/conf/basic-cql2"
 
 # Part 4: Create, Replace, Update and Delete.
-CONF_CREATE_REPLACE_DELETE = (
-    "http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/create-replace-delete"
-)
+CONF_CREATE_REPLACE_DELETE = "http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/create-replace-delete"
 CONF_UPDATE = "http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/update"
 CONF_TRANSACTION_FEATURES = "http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/features"

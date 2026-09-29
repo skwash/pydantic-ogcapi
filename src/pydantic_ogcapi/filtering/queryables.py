@@ -56,17 +56,11 @@ class Queryable(OGCModel):
             for example ``primary-geometry`` or ``primary-instant``.
     """
 
-    type: Optional[str] = Field(
-        default=None, description="JSON Schema type; omitted for spatial queryables."
-    )
-    format: Optional[str] = Field(
-        default=None, description="Format, e.g. 'geometry-point' or 'date-time'."
-    )
+    type: Optional[str] = Field(default=None, description="JSON Schema type; omitted for spatial queryables.")
+    format: Optional[str] = Field(default=None, description="Format, e.g. 'geometry-point' or 'date-time'.")
     title: Optional[str] = Field(default=None, description="A label for the queryable.")
     description: Optional[str] = Field(default=None, description="A description of the queryable.")
-    enum: Optional[list[Any]] = Field(
-        default=None, description="The permitted values, if enumerated."
-    )
+    enum: Optional[list[Any]] = Field(default=None, description="The permitted values, if enumerated.")
     x_ogc_role: Optional[str] = Field(
         default=None,
         alias="x-ogc-role",
@@ -140,16 +134,10 @@ class Function(OGCModel):
     """
 
     name: str = Field(..., description="The function name.")
-    returns: list[QueryableType] = Field(
-        ..., description="The value types the function may return."
-    )
+    returns: list[QueryableType] = Field(..., description="The value types the function may return.")
     description: Optional[str] = Field(default=None, description="A description of the function.")
-    metadata_url: Optional[str] = Field(
-        default=None, description="A URI with further documentation."
-    )
-    arguments: Optional[list[FunctionArgument]] = Field(
-        default=None, description="The function's arguments, in order."
-    )
+    metadata_url: Optional[str] = Field(default=None, description="A URI with further documentation.")
+    arguments: Optional[list[FunctionArgument]] = Field(default=None, description="The function's arguments, in order.")
 
 
 class Functions(OGCModel):

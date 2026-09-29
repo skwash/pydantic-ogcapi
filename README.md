@@ -47,9 +47,7 @@ Models declare **snake_case** attributes and serialise to the **camelCase**
 define. Both spellings are accepted when parsing:
 
 ```python
-fc = FeatureCollection.model_validate(
-    {"type": "FeatureCollection", "features": [], "numberMatched": 127}
-)
+fc = FeatureCollection.model_validate({"type": "FeatureCollection", "features": [], "numberMatched": 127})
 fc.number_matched  # 127
 fc.model_dump()["numberMatched"]  # 127
 ```

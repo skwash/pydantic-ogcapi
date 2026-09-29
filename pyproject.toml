@@ -34,7 +34,7 @@ Homepage = "https://github.com/skwash/pydantic-ogcapi"
 packages = ["src/pydantic_ogcapi"]
 
 [tool.ruff]
-line-length = 100
+line-length = 120
 src = ["src", "tests"]
 
 [tool.ruff.lint]

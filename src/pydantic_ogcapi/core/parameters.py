@@ -32,15 +32,9 @@ class DatetimeInterval(OGCModel):
             an interval, in which case ``start`` and ``end`` are equal.
     """
 
-    start: Optional[datetime] = Field(
-        default=None, description="Start of the interval, or None if unbounded."
-    )
-    end: Optional[datetime] = Field(
-        default=None, description="End of the interval, or None if unbounded."
-    )
-    is_instant: bool = Field(
-        default=False, description="Whether the parameter was a single instant."
-    )
+    start: Optional[datetime] = Field(default=None, description="Start of the interval, or None if unbounded.")
+    end: Optional[datetime] = Field(default=None, description="End of the interval, or None if unbounded.")
+    is_instant: bool = Field(default=False, description="Whether the parameter was a single instant.")
 
     @classmethod
     def parse(cls, value: str) -> "DatetimeInterval":
@@ -67,9 +61,7 @@ class DatetimeInterval(OGCModel):
 
         parts = raw.split("/")
         if len(parts) != 2:
-            raise ValueError(
-                f"datetime interval must have exactly one '/' separator, got {value!r}"
-            )
+            raise ValueError(f"datetime interval must have exactly one '/' separator, got {value!r}")
 
         head, tail = (part.strip() for part in parts)
         start = None if head in ("", OPEN_ENDED) else _parse_instant(head)

@@ -26,9 +26,7 @@ class CrsParameters(OGCModel):
             as ``bbox-crs``.
     """
 
-    crs: Optional[str] = Field(
-        default=None, description="The CRS to return response geometries in."
-    )
+    crs: Optional[str] = Field(default=None, description="The CRS to return response geometries in.")
     bbox_crs: Optional[str] = Field(
         default=None,
         alias="bbox-crs",

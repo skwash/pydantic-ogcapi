@@ -32,10 +32,6 @@ class Link(OGCModel):
     href: str = Field(..., description="The URI of the linked resource.")
     rel: str = Field(..., description="The link relation type.")
     type: Optional[str] = Field(default=None, description="The media type of the linked resource.")
-    hreflang: Optional[str] = Field(
-        default=None, description="The language of the linked resource (RFC 5646 tag)."
-    )
+    hreflang: Optional[str] = Field(default=None, description="The language of the linked resource (RFC 5646 tag).")
     title: Optional[str] = Field(default=None, description="Human-readable label for the link.")
-    length: Optional[int] = Field(
-        default=None, description="Expected size of the linked resource, in bytes."
-    )
+    length: Optional[int] = Field(default=None, description="Expected size of the linked resource, in bytes.")
