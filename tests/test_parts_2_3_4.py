@@ -126,9 +126,7 @@ class TestTransactions:
         assert headers == {"If-Match": '"abc123"'}
 
     def test_conditional_headers_format_http_date(self):
-        headers = ConditionalHeaders(
-            if_unmodified_since="2017-08-17T08:05:32Z"
-        ).to_headers()
+        headers = ConditionalHeaders(if_unmodified_since="2017-08-17T08:05:32Z").to_headers()
         assert headers["If-Unmodified-Since"] == "Thu, 17 Aug 2017 08:05:32 GMT"
 
     def test_empty_conditional_headers(self):

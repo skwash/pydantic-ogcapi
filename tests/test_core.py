@@ -94,9 +94,7 @@ class TestExtent:
 
     def test_temporal_rejects_reversed_interval(self):
         with pytest.raises(ValidationError):
-            TemporalExtent(
-                interval=[["2020-01-01T00:00:00Z", "2019-01-01T00:00:00Z"]]
-            )
+            TemporalExtent(interval=[["2020-01-01T00:00:00Z", "2019-01-01T00:00:00Z"]])
 
     def test_extent_members_optional(self):
         assert Extent().model_dump() == {}
@@ -148,9 +146,7 @@ class TestFeatures:
         assert feat.model_dump()["geometry"]["coordinates"] == [1.0, 2.0]
 
     def test_three_dimensional_position_keeps_altitude(self):
-        feat = Feature(
-            type="Feature", geometry={"type": "Point", "coordinates": [1.0, 2.0, 30.0]}
-        )
+        feat = Feature(type="Feature", geometry={"type": "Point", "coordinates": [1.0, 2.0, 30.0]})
         assert feat.model_dump()["geometry"]["coordinates"] == [1.0, 2.0, 30.0]
 
     def test_nested_polygon_rings_are_trimmed(self):

@@ -63,9 +63,7 @@ class Queryable(OGCModel):
         default=None, description="Format, e.g. 'geometry-point' or 'date-time'."
     )
     title: Optional[str] = Field(default=None, description="A label for the queryable.")
-    description: Optional[str] = Field(
-        default=None, description="A description of the queryable."
-    )
+    description: Optional[str] = Field(default=None, description="A description of the queryable.")
     enum: Optional[list[Any]] = Field(
         default=None, description="The permitted values, if enumerated."
     )
@@ -104,9 +102,7 @@ class Queryables(OGCModel):
     )
     type: str = Field(default="object", description="The schema type; always 'object'.")
     title: Optional[str] = Field(default=None, description="A title for the resource.")
-    description: Optional[str] = Field(
-        default=None, description="A description of the resource."
-    )
+    description: Optional[str] = Field(default=None, description="A description of the resource.")
     properties: dict[str, Queryable] = Field(
         default_factory=dict, description="The queryables, keyed by property name."
     )
@@ -126,13 +122,9 @@ class FunctionArgument(OGCModel):
         description: A description of the argument.
     """
 
-    type: list[QueryableType] = Field(
-        ..., description="The value types this argument accepts."
-    )
+    type: list[QueryableType] = Field(..., description="The value types this argument accepts.")
     title: Optional[str] = Field(default=None, description="A label for the argument.")
-    description: Optional[str] = Field(
-        default=None, description="A description of the argument."
-    )
+    description: Optional[str] = Field(default=None, description="A description of the argument.")
 
 
 class Function(OGCModel):
@@ -151,9 +143,7 @@ class Function(OGCModel):
     returns: list[QueryableType] = Field(
         ..., description="The value types the function may return."
     )
-    description: Optional[str] = Field(
-        default=None, description="A description of the function."
-    )
+    description: Optional[str] = Field(default=None, description="A description of the function.")
     metadata_url: Optional[str] = Field(
         default=None, description="A URI with further documentation."
     )
@@ -169,9 +159,7 @@ class Functions(OGCModel):
         functions: The functions the service offers. Required.
     """
 
-    functions: list[Function] = Field(
-        ..., description="The functions the service offers."
-    )
+    functions: list[Function] = Field(..., description="The functions the service offers.")
 
 
 class FilterParameters(OGCModel):

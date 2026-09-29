@@ -26,9 +26,7 @@ class LandingPage(OGCModel):
 
     links: list[Link] = Field(..., description="Links to the service's resources.")
     title: Optional[str] = Field(default=None, description="The title of the service.")
-    description: Optional[str] = Field(
-        default=None, description="A description of the service."
-    )
+    description: Optional[str] = Field(default=None, description="A description of the service.")
 
 
 class ConformanceDeclaration(OGCModel):
@@ -56,9 +54,7 @@ class SpatialExtent(OGCModel):
     bbox: list[list[float]] = Field(
         ..., min_length=1, description="One or more bounding boxes; the first is overall."
     )
-    crs: Literal[CRS84, CRS84h] = Field(
-        default=CRS84, description="The CRS of the bounding boxes."
-    )
+    crs: Literal[CRS84, CRS84h] = Field(default=CRS84, description="The CRS of the bounding boxes.")
 
     @field_validator("bbox")
     @classmethod
@@ -66,9 +62,7 @@ class SpatialExtent(OGCModel):
         """Require each bounding box to hold exactly 4 or 6 ordinates."""
         for box in boxes:
             if len(box) not in (4, 6):
-                raise ValueError(
-                    f"each bbox must have 4 or 6 ordinates, got {len(box)}"
-                )
+                raise ValueError(f"each bbox must have 4 or 6 ordinates, got {len(box)}")
         return boxes
 
 
@@ -97,14 +91,10 @@ class TemporalExtent(OGCModel):
         """Require each interval to be exactly two elements, start before end."""
         for entry in intervals:
             if len(entry) != 2:
-                raise ValueError(
-                    f"each interval must have exactly 2 elements, got {len(entry)}"
-                )
+                raise ValueError(f"each interval must have exactly 2 elements, got {len(entry)}")
             start, end = entry
             if start is not None and end is not None and end < start:
-                raise ValueError(
-                    f"interval end ({end}) must not precede its start ({start})"
-                )
+                raise ValueError(f"interval end ({end}) must not precede its start ({start})")
         return intervals
 
 
@@ -147,9 +137,7 @@ class Collection(OGCModel):
     id: str = Field(..., description="The identifier of the collection.")
     links: list[Link] = Field(..., description="Links to the collection's resources.")
     title: Optional[str] = Field(default=None, description="A title for the collection.")
-    description: Optional[str] = Field(
-        default=None, description="A description of the collection."
-    )
+    description: Optional[str] = Field(default=None, description="A description of the collection.")
     extent: Optional[Extent] = Field(
         default=None, description="The extent of the collection's features."
     )

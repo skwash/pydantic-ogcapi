@@ -26,9 +26,7 @@ CONF_QUERYABLES_QUERY_PARAMETERS = (
     "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/queryables-query-parameters"
 )
 CONF_FILTER = "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/filter"
-CONF_FEATURES_FILTER = (
-    "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter"
-)
+CONF_FEATURES_FILTER = "http://www.opengis.net/spec/ogcapi-features-3/1.0/conf/features-filter"
 
 # CQL2 (OGC 21-065r2), advertised alongside Part 3.
 CONF_CQL2_TEXT = "http://www.opengis.net/spec/cql2/1.0/conf/cql2-text"
@@ -40,6 +38,4 @@ CONF_CREATE_REPLACE_DELETE = (
     "http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/create-replace-delete"
 )
 CONF_UPDATE = "http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/update"
-CONF_TRANSACTION_FEATURES = (
-    "http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/features"
-)
+CONF_TRANSACTION_FEATURES = "http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/features"

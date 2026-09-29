@@ -50,8 +50,8 @@ define. Both spellings are accepted when parsing:
 fc = FeatureCollection.model_validate(
     {"type": "FeatureCollection", "features": [], "numberMatched": 127}
 )
-fc.number_matched                      # 127
-fc.model_dump()["numberMatched"]       # 127
+fc.number_matched  # 127
+fc.model_dump()["numberMatched"]  # 127
 ```
 
 `model_dump()` and `model_dump_json()` default to `by_alias=True` and
@@ -63,8 +63,8 @@ were never set — OGC responses distinguish an absent member from a null one.
 ```python
 from pydantic_ogcapi import BoundingBox, DatetimeInterval
 
-DatetimeInterval.parse("2018-02-12T00:00:00Z/..")   # half-open interval
-BoundingBox.parse("-180,-90,180,90")                # 2D bounding box
+DatetimeInterval.parse("2018-02-12T00:00:00Z/..")  # half-open interval
+BoundingBox.parse("-180,-90,180,90")  # 2D bounding box
 ```
 
 ## Layout

@@ -89,9 +89,7 @@ class Feature(_GeoJSONOGCModel, FeatureModel):
             and a ``collection`` link back to the owning collection.
     """
 
-    links: Optional[list[Link]] = Field(
-        default=None, description="Links to related resources."
-    )
+    links: Optional[list[Link]] = Field(default=None, description="Links to related resources.")
 
 
 class FeatureCollection(_GeoJSONOGCModel, FeatureCollectionModel):
@@ -113,12 +111,8 @@ class FeatureCollection(_GeoJSONOGCModel, FeatureCollectionModel):
             as ``numberReturned``.
     """
 
-    features: list[Feature] = Field(
-        ..., description="The features in this response."
-    )
-    links: Optional[list[Link]] = Field(
-        default=None, description="Links to related resources."
-    )
+    features: list[Feature] = Field(..., description="The features in this response.")
+    links: Optional[list[Link]] = Field(default=None, description="Links to related resources.")
     time_stamp: Optional[datetime] = Field(
         default=None,
         alias="timeStamp",

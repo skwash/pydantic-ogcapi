@@ -78,9 +78,7 @@ class DatetimeInterval(OGCModel):
         if start is None and end is None:
             raise ValueError("datetime interval must not be open at both ends")
         if start is not None and end is not None and end < start:
-            raise ValueError(
-                f"datetime interval end ({tail}) must not precede its start ({head})"
-            )
+            raise ValueError(f"datetime interval end ({tail}) must not precede its start ({head})")
         return cls(start=start, end=end, is_instant=False)
 
     def to_parameter(self) -> str:
@@ -117,18 +115,14 @@ class BoundingBox(OGCModel):
         values: The raw ordinates, either 4 or 6 of them.
     """
 
-    values: list[float] = Field(
-        ..., description="The bounding box ordinates: 4 for 2D, 6 for 3D."
-    )
+    values: list[float] = Field(..., description="The bounding box ordinates: 4 for 2D, 6 for 3D.")
 
     @field_validator("values")
     @classmethod
     def _check_length(cls, values: list[float]) -> list[float]:
         """Reject a bbox that is not 4 or 6 ordinates long."""
         if len(values) not in (4, 6):
-            raise ValueError(
-                f"bbox must have 4 or 6 ordinates, got {len(values)}"
-            )
+            raise ValueError(f"bbox must have 4 or 6 ordinates, got {len(values)}")
         return values
 
     @classmethod
