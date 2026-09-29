@@ -8,13 +8,13 @@ version = "0.1.0"
 description = "Pydantic models for the OGC API - Features standards, extending pydantic-geojson."
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "MIT" }
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
 authors = [{ name = "Josh", email = "josh@skwash.net" }]
 keywords = ["ogc", "ogcapi", "geojson", "pydantic", "features", "gis"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Topic :: Scientific/Engineering :: GIS",
     "Typing :: Typed",
