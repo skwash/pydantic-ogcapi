@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pydantic-ogcapi"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Pydantic models for the OGC API - Features standards, extending pydantic-geojson."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -29,6 +29,11 @@ dev = ["pytest>=8", "ruff>=0.5"]
 
 [project.urls]
 Homepage = "https://github.com/skwash/pydantic-ogcapi"
+Repository = "https://github.com/skwash/pydantic-ogcapi"
+Issues = "https://github.com/skwash/pydantic-ogcapi/issues"
+
+[tool.hatch.version]
+path = "src/pydantic_ogcapi/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pydantic_ogcapi"]

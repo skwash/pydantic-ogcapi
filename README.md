@@ -1,5 +1,10 @@
 # pydantic-ogcapi
 
+[![CI](https://github.com/skwash/pydantic-ogcapi/actions/workflows/ci.yml/badge.svg)](https://github.com/skwash/pydantic-ogcapi/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/pydantic-ogcapi.svg)](https://pypi.org/project/pydantic-ogcapi/)
+[![Python versions](https://img.shields.io/pypi/pyversions/pydantic-ogcapi.svg)](https://pypi.org/project/pydantic-ogcapi/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
 Pydantic v2 models for the [OGC API - Features](https://ogcapi.ogc.org/features/)
 standards, extending [pydantic-geojson](https://pypi.org/project/pydantic-geojson/).
 
@@ -98,6 +103,22 @@ A few details that are easy to get wrong, and which the models encode:
 pip install -e ".[dev]"
 pytest
 ```
+
+## Releasing
+
+The version is single-sourced from `__version__` in
+`src/pydantic_ogcapi/__init__.py`; `pyproject.toml` reads it from there.
+
+1. Bump `__version__` and merge that to `main`.
+2. Publish a GitHub Release tagged `v<version>` (for example `v0.1.0`).
+
+That triggers the publish workflow, which builds the sdist and wheel,
+verifies the tag matches `__version__`, and uploads to PyPI via trusted
+publishing. To rehearse first, run the workflow manually from the Actions tab
+and choose the `testpypi` target.
+
+Publishing is irreversible — a version number cannot be reused on PyPI even
+after a release is deleted — so the workflow never runs on an ordinary push.
 
 ## License
 

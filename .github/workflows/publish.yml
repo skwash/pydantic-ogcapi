@@ -1,0 +1,103 @@
+name: Publish
+
+# Publishing is irreversible: a version number can never be reused on PyPI,
+# even after a release is deleted. So this never runs on an ordinary push.
+# A GitHub Release publishes to PyPI; a manual dispatch can target TestPyPI
+# first to rehearse the upload.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Index to publish to
+        required: true
+        default: testpypi
+        type: choice
+        options:
+          - testpypi
+          - pypi
+
+jobs:
+  build:
+    name: build distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install --upgrade pip build twine
+          python -m build
+
+      - name: Check distribution metadata
+        run: python -m twine check dist/*
+
+      - name: Verify the tag matches the package version
+        # Guards against tagging v0.2.0 while __init__.py still says 0.1.0,
+        # which would publish the wrong version under the right name.
+        if: github.event_name == 'release'
+        run: |
+          python -m pip install -e .
+          package_version="$(python -c 'import pydantic_ogcapi; print(pydantic_ogcapi.__version__)')"
+          tag_version="${GITHUB_REF_NAME#v}"
+          echo "tag=${tag_version} package=${package_version}"
+          if [ "${package_version}" != "${tag_version}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match __version__ ${package_version}"
+            exit 1
+          fi
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+  testpypi:
+    name: publish to TestPyPI
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && inputs.target == 'testpypi'
+    runs-on: ubuntu-latest
+    # Requires a `testpypi` environment on the repo and a trusted publisher
+    # registered at https://test.pypi.org/manage/account/publishing/ for
+    # workflow `publish.yml` in this environment. Optional: skip this job and
+    # release straight to PyPI if you do not want a rehearsal step.
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/pydantic-ogcapi
+    permissions:
+      id-token: write  # required for trusted publishing
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+  pypi:
+    name: publish to PyPI
+    needs: build
+    if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.target == 'pypi')
+    runs-on: ubuntu-latest
+    # Requires a trusted publisher registered at
+    # https://pypi.org/manage/account/publishing/ for owner `skwash`,
+    # repository `pydantic-ogcapi`, workflow `publish.yml`, environment `pypi`.
+    # No API token is stored; the upload authenticates over OIDC.
+    environment:
+      name: pypi
+      url: https://pypi.org/p/pydantic-ogcapi
+    permissions:
+      id-token: write  # required for trusted publishing
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
